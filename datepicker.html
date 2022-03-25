@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- https://flatpickr.js.org/getting-started/ -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+  </head>
+  <style>
+    .date-range-input {
+      border-radius: 15px;
+      border: 1px solid black;
+      padding: 3px 8px;
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <input type="text" id='selectedDates' class='date-range-input' />
+    <input type="text" id='selectedDates2' class='date-range-input' />
+    <input type="text" id='selectedDates3' class='date-range-input' />
+   
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+      const today = new Date();
+      
+      const dateranges = document.getElementsByClassName('date-range-input');
+      flatpickr(dateranges, {
+        mode: "multiple",
+        dateFormat: "Y-m-d",
+        defaultDate: [today],
+      });
+    </script>
+  </body>
+</html>

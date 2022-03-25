@@ -1,0 +1,179 @@
+.orderList {
+    background-color: #c3c3c3;
+    height: 92%;
+    border-radius: 15px;
+    padding: 1em;
+    text-align: center;
+}
+.orderList div:nth-child(1) {
+    margin-bottom: 1em;
+}
+.orderList h5 {
+    text-align: left;
+    margin-top: 0;
+}
+
+.orderList input, .orderList select {
+    border: 1px solid #727272;
+    border-radius: 7px;
+    height: 28px;
+    width: 7vw !important;
+}
+
+.orderList input {
+    padding-left: 10px;
+}
+
+.orderList a:hover {
+    cursor: pointer;
+}
+.orderList a:hover i {
+    color: #4fa9fb;
+}
+
+.orderList a i {
+    font-size: 1.2em;
+    color: var(--darkgray);
+    padding: 0 5px 0 5px
+}
+
+.dateFilter {
+    margin-bottom: 1em;
+}
+.dateFilter p {
+    margin: 0;
+    /* text-decoration: underline; */
+}
+
+.orders {
+    max-height: 60vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin-bottom: 1vh;
+}
+.orders::-webkit-scrollbar {
+/* display: none; */
+}
+
+#completedPOBox {
+    width: 100%;
+    height: 6vh;
+    background-color: #FFF;
+    border-radius: 15px;
+    padding-top: 1vh;
+    overflow-y: scroll;
+}
+
+
+.poExtend {
+    height: 60vh !important;
+    transition: height 0.8s;
+    transition-timing-function: ease;
+}
+
+.poRetract {
+    height: 0 !important;
+    transition: height 0.8s;
+    transition-timing-function: ease;
+}
+
+.poExtendRetract {
+    height: 6vh !important;
+    transition: height 0.8s;
+    transition-timing-function: ease;
+}
+
+
+.poRetractExtend {
+    height: 54vh !important;
+    transition: height 0.8s;
+    transition-timing-function: ease;
+}
+
+
+hr {
+    margin: 5px;
+}
+.orderItem {
+    margin-bottom: 0 !important;
+    font-size: 20px;
+}
+.orderItem:hover {
+    background-color: #4fa9fb;
+    cursor: pointer;
+}
+.ordersHeader {
+    display: flex;
+    justify-content: center;
+}
+.ordersHeader p {
+    /* text-decoration: underline; */
+    margin: 0 12px 0 12px;
+}
+.headerCnt {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin-top: 1em;
+}
+
+
+
+.poReset h2, p {
+    margin: 0;
+}
+
+.poPanel {
+    background-color: var(--gray);
+    padding: 1em;
+    margin: 3px;
+    border-radius: 15px;
+    font: 14px/14px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif !important;
+}
+.poDetailsLi > input, .poDetailsLi > select {
+    border: 1px solid #727272;
+    border-radius: 7px;
+    height: 28px;
+    width: 80% !important;
+    margin: auto !important;
+}
+
+#poInfo {
+    height: 16vh;
+}
+#poInfo h2 {
+    margin-top: 2vh;
+    font-size: 1em;
+    margin-left: 1vw;
+}
+#poInfo h2:not(:nth-child(1)) {
+    font: 14px/14px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+}
+
+#poDetails {
+    height: 74.5vh;
+    margin-top: 6px;
+}
+#poDetails > #loading {
+    text-align: center;
+    width: 100%;
+}
+.poDetailsLi {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 8vh;
+    flex-direction: column;
+}
+
+#poItems {
+    height: 91vh;
+    background-color: #FFFFFF;
+}
+
+
+#addPOBtn {
+    font-size: 2em;
+}

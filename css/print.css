@@ -1,0 +1,370 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 28, 2015, 12:40:05 AM
+    Author     : Nathan
+*/
+
+@import url('/css/icoFontFace.css');
+
+@font-face {
+	font-family: 'IDAutomation';
+	src:url('/fonts/IDAutomationHC39M_Free_0.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@page{
+    margin:.25cm auto;
+    
+}
+
+
+@media print{
+    /*Reset Style*/
+    body {margin:0; 
+          padding:0; 
+          line-height: 1.4em; 
+          word-spacing:1px; 
+          letter-spacing:0.2px; 
+          font: 13px Arial, 
+        Helvetica,"Lucida Grande", 
+        serif; color: #000;
+    }
+    
+       #report5 table td:last-child {display:none}
+       #report5 table th:last-child {display:none}
+       
+       
+       footer.onlyprint{
+           position:fixed;
+           bottom: 0;
+       }
+    
+       
+    .print span{
+        font-family: 'icomoon';
+        color: #757575;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 48px;
+    }
+
+        /*Remove Element*/
+    nav,
+    .noPrint,
+    button, #subNav, #mysubNav{
+        display:none;
+    }
+    
+    .print a{
+        text-decoration: none;
+    }
+    
+    .print span{
+        font-size: 15pt;
+        display: inline;
+        
+    }
+
+
+    /* Table Style */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 25pt;
+    }
+
+    td, th {
+        font-size: 1em;
+        border: 1pt solid #000;
+        padding: 5pt 10pt 5pt 10pt;
+    }
+    
+    th {
+        font-size: 1.1em;
+        text-align: left;
+        padding-top: 5px;
+        padding-bottom: 4px;
+        color: #000;
+        -webkit-print-color-adjust: exact;
+        background-color: #B8B8A0;
+        
+    }
+    
+    header h1, header h2{
+        display: inline;
+    }
+    
+    header h2{
+        text-align: right;
+        
+    }
+    
+    .pageBreak {
+        page-break-after: always;
+        font-weight: bold;
+    }
+   
+    
+    p{
+        padding:0;
+        margin: 0;
+    }
+    
+    /* 
+        Customize Report 1 
+    */
+    #barcode, .keycode p{
+        font-family: 'IDAutomation';
+        font-size: 2em;
+    }
+    
+    .keycode h1{
+        margin: .25em 0 0 0em;
+        font-size: 2.5em;
+    }
+    
+    .keycode p{
+        margin-left: 0em;
+    }
+    
+    .divider td{
+        border-top: 5pt solid #000;
+    }
+    
+    .cover{
+        margin: -40px 0 0 0em;
+        width: 305px;
+        height: 15px;
+        background-color: #000;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    .groupHeader{
+        background-color: #B8B8A0;
+        -webkit-print-color-adjust: exact;
+        border-top: hidden;
+    }
+    /*
+    .groupHeader td{
+        border-left: hidden;
+        border-right: hidden;
+    }
+    */
+    .spaceRow td{
+        padding-top: 15pt;
+        border-left: hidden;
+        border-right: hidden;
+        border-bottom: hidden;
+    }
+    
+    
+    /* 
+        Customize Report 3 
+    */
+    
+    .noGrid{
+        border-top: 1pt hidden #000;
+        border-bottom: 1pt hidden #000;
+    }
+    
+    .noGrid:first-child{
+        border-left: 1pt hidden #000;
+    }
+
+    .noGrid:nth-child(8){
+        border-left: 1pt hidden #000;
+    }
+
+    
+    /* heading Box */
+    
+    .report3 td{
+        font-size: 8pt;
+        padding: 5pt 2pt 5pt 2pt;
+    }
+    .report3 th{
+        font-size: 8pt;
+        padding: 5pt 2pt 5pt 2pt;
+    }
+    
+    .report3 .headerBox td:first-child{
+        background-color: #B8B8A0;
+        -webkit-print-color-adjust: exact;
+        border-left: hidden;
+        border-top: hidden;
+        border-bottom: hidden;
+        font-style:normal;
+        font-size: 1em;
+    }
+    
+   .report3 .noGrid:nth-child(even){
+        background-color: #EBEBE4;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    .report3 .noGrid:nth-child(3){
+        border-right: 1pt solid #000;
+    }
+    /*
+    .report3 .noGrid td:last-child{
+        border-right: 1pt hidden #000;
+    }
+ */
+    .report3 .headerBox td{
+        background-color: #D5D5C7;
+        -webkit-print-color-adjust: exact;
+        font-style: italic;
+        font-size: 7pt;
+    }
+    
+    .report3 .headerBox td:nth-child(3){
+        border-right: 1pt solid #000;
+    }
+    
+    .report3 .groupFooter td:first-child,
+    .report3 .groupFooter td:nth-child(2){
+        background-color: #FFF;
+        -webkit-print-color-adjust: exact;
+        border-left: hidden;
+        border-bottom: hidden;
+        white-space: nowrap;
+    }
+    
+    .report3 .groupFooter td:first-child{
+        text-align: right;
+    }
+    
+    .report3 .groupFooter td:nth-child(2){
+        text-align: left;
+    }
+    
+    .report3 .groupFooter td{
+        background-color: #D5D5C7;
+        -webkit-print-color-adjust: exact;
+        font-weight: bold;
+    }
+    
+    
+    .report3 .spaceRow td{
+        padding-top: 2pt;
+        border-left: hidden;
+        border-right: hidden;
+        border-bottom: hidden;
+    }
+    
+    .totals table{
+        margin: 100px;
+    }
+    
+    .totals table tr:last-child td{
+        background: -webkit-gradient(linear, left top, left bottom, from(#D5D5C7), to(#D5D5C7));
+        background: -moz-linear-gradient(top,  #D5D5C7,  #D5D5C7);
+        background-color: #D5D5C7;
+        -webkit-print-color-adjust: exact;
+        font-weight: bold;
+        font-size: 1em;
+    }
+    
+    
+   .timeCard table{
+        font-size: 8pt;
+    }
+    
+    .timeCard table:nth-child(2){
+        font-size: 7pt;
+    }
+
+    .timeCard table{
+        margin-top: 1cm;
+    }   
+    
+    .timeCard table td,
+    .timeCard table th{
+        border: hidden;
+    }
+     
+    table.headerTable{
+        width: 7cm;
+    }
+    
+    table.footerTable{
+        width: 6cm;
+    }
+    
+    table.footerTable{
+        margin-top: 1cm;
+        margin-bottom: 3cm;
+    }
+
+    table.headerTable tr:first-child td,
+    table.footerTable tr:first-child td{
+        border-top: 1pt solid #000;
+    }
+    
+    table.headerTable tr:last-child td,
+    table.footerTable tr:last-child td{
+        border-bottom: 1pt solid #000;
+    }
+    
+    table.headerTable tr:first-child td{
+        border-bottom: 1pt solid #000;
+    }
+    
+    table.footerTable tr:nth-child(2) td{
+        border-top: 1pt solid #000;
+    }
+    
+    td.timeCardPunch{
+        height: .75cm;
+    }
+    
+    table.minTable td{
+        height: 1cm;
+    }
+    
+    td.desc{
+        font-size: 10px;
+    }
+    
+    p:first-child{
+        margin-bottom: 0cm;
+    }
+    p{
+        margin-bottom: .75cm;
+    }
+    
+    #watermarkp{
+        position:relative
+    }
+    #watermarkc
+        {
+
+        color: #000;
+        font-size: 6.5em;
+        z-index: 10000;
+        filter: alpha(opacity=15);
+        white-space: normal;
+         position:absolute;
+         top:30vh;
+         left:12vw;
+         opacity:0.65;
+         -webkit-transform: rotate(-45deg);
+    }
+
+}
+    
+
+
+

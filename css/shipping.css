@@ -1,0 +1,84 @@
+.orderList a i {
+    font-size: 1em;
+    color: var(--darkgray);
+}
+.orderList a:hover i {
+    color: #4fa9fb;
+    cursor: pointer;
+}
+
+.orderList > input, select {
+    border: 1px solid #727272;
+    border-radius: 7px;
+    height: 28px;
+    margin-left: 0 !important;
+}
+
+.orderList {
+    background-color: var(--white);
+    height: 100%;
+    border-radius: 15px;
+    padding: 0.5em;
+    text-align: center;
+}
+
+.customer {
+    height: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+.customer select {
+    width: 90%;
+    height: 60%;
+    margin: 2px;
+    border-radius: 5px;
+    font-size: 0.7em;
+}
+.customer, .status{
+    display: flex;
+    background-color: var(--gray) !important;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.status {
+    padding: 0.2em;
+    margin-top: 0.5em;
+}
+.status a {
+    margin: 0.2em 1em 0.2em 1em;
+}
+
+.ordersHeader {
+    margin: 0.5em;
+    margin-top: 1em;
+}
+.ordersHeader i {
+    font-size: 1em;
+}
+.ordersHeader h5 {
+    text-align: center;
+    margin: 0.5em;
+}
+
+hr {
+    margin: 5px;
+}
+.orders {
+    max-height: 77vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.orders::-webkit-scrollbar {
+    display: none;
+}
+.orders p {
+    margin-bottom: 0 !important;
+    font-size: 20px;
+    margin-left: 0;
+}
+.orders p:hover {
+    background-color: #4fa9fb;
+    cursor: pointer;
+}

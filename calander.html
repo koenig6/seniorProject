@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+/* Globals */
+:root {
+    --light-gray: #DADCE0;
+    --light-blue: #1B9CE2;
+}
+body {
+    margin: 0;
+    height: 100vh;
+}
+select {
+    border-radius: 15px;
+    height: 25px;
+    width: 250px;
+    padding-left: 8px;
+}
+
+
+.calender-container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    height: 100%;
+}
+
+/* Calender Styling */
+#app-calender {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    height: 100%;
+}
+.calender-options {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Calender Day Styling */
+.day {
+    border-left: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--light-gray);
+    border-right: 1px solid var(--light-gray);
+    text-align: center;
+    padding-top: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 200ms, color 200ms;
+}
+.day, .selected {
+    user-select: none;
+}
+
+.name {
+    padding-bottom: 5px;
+}
+.weekend {
+    color: var(--light-blue);
+}
+.selected {
+    background-color: var(--light-blue);
+    color: white;
+}
+
+.woTitle {
+    color: black;
+    background-color: white;
+    text-align: center;
+}
+
+</style>
+<body>
+
+<div class="calender-container">
+    <div class="calender-options">
+        <h1>January</h1>
+        <select name="" id="selectedWO">
+            <option value="" selected>Select Work Order...</option>
+            <option value="test1">test1</option>
+            <option value="test2">test2</option>
+            <option value="test3">test3</option>
+            <option value="test4">test4</option>
+        </select>
+    </div>
+    <div id="app-calender"></div>
+</div>
+
+</body>
+<script>
+
+
+// Get Day Name
+const getDayName = day => {
+
+    const date = new Date(Date.UTC(2021, 0, day));
+
+    return Intl.DateTimeFormat('en-US', { weekday: 'short' }).format(date);
+
+}
+
+
+// Setup Calender
+const calender = document.querySelector('#app-calender');
+
+const isWeekend = day => {
+    // 6 - Sunday || 7 - Saturday
+    return day % 7 === 6 || day % 7 === 0;
+}
+
+for(let day = 1; day <= 31; day++ ) {
+
+    let name = '';
+    const weekend = isWeekend(day);
+    
+    if(day <= 7) {
+        const dayName = getDayName(day);
+        name = `<div class="name">${dayName}</div>`;
+    }
+
+    calender.insertAdjacentHTML('beforeend', `<div class="day ${weekend ? 'weekend' : ''}">${name}${day}</div>`);
+}
+
+document.querySelectorAll('#app-calender .day').forEach(day => {
+    day.addEventListener('click', event => {
+        const selectedWO = document.getElementById('selectedWO').value;
+        const day = event.currentTarget;
+
+        if(!selectedWO) {
+            alert('Select a Work Order!');
+            return
+        }
+
+        if( day.classList.contains(selectedWO) && day.classList.contains('selected') ) {
+            
+            day.classList.remove(selectedWO);
+            day.lastElementChild.remove();
+            
+        }else {
+            
+            day.classList.add('selected');
+            day.classList.add(selectedWO);
+            day.innerHTML += `<div class="woTitle">${selectedWO}</div>`;
+            
+        }
+
+        if( day.classList.length == 2 ) {
+            day.classList.remove('selected');
+        }
+
+    })
+})
+
+</script>
+</html>
+
+
+<!-- console.log(event.currentTarget.previousSibling);
+console.log(event.currentTarget.nextSibling); -->

@@ -1,0 +1,333 @@
+<html>
+
+    <script>
+
+        function clearScreen() {
+            document.getElementById('view').innerHTML = '';
+        };
+
+        function lastEntry() {
+
+            action = document.getElementById('lastEntryInput').value;
+            vars = document.getElementById('lastEntryInput1').value;
+
+            setAction(action);
+
+            varsArr = vars.split(' ');
+
+            // alert(varsArr.toString());
+
+            for(i = 0; i < varsArr.length; i++){
+                for(i = 0; i < varsArr.length; i++){
+                    enter(varsArr[i]);
+                }
+            }
+
+        }
+
+        function ssv() {
+
+            vars = document.getElementById('ssvInput').value;
+
+            varsArr = vars.split(' ');
+
+            // alert(varsArr.toString());
+
+            // for(i = 0; i <div varsArr.length; i++){
+            //     enter(varsArr[i]);
+            // }
+
+        }
+
+        function openMenu(menu) {
+
+            if(document.getElementById('view').innerHTML != '') {
+                $r = confirm('Are you sure you want to clear the view?');
+            }else {
+                $r = true;
+            }
+
+            if($r) {
+                if(menu == 0) {
+                clearScreen();
+                }else if(menu == 1) { 
+                    buildDataCodeBuilder(); 
+                }else if(menu == 2) {
+                    buildProgressBar();
+                }else if(menu == 3) {
+                    buildCheckBadChars();
+                }else if(menu == 4) {
+                    buildCustomReportBuilder();
+                }else if(menu == 5) {
+                    buildToggleFilterBuilder();
+                }
+            }
+            
+        }
+
+        function buildCustomReportBuilder() {
+            document.getElementById('view').innerHTML = `
+            <label>SQL: </label>
+            <input id="sql" style="width: 80%;">
+            <input id="var">
+            <button onclick="addVar()">Add Variable</button>
+            <div id="varList" style="background-color: gray; width: 25%"></div>
+            <input id="varsListInput" class="hide">
+            `;
+        }
+
+        function buildToggleFilterBuilder() {
+            document.getElementById('view').innerHTML = `
+            <label>input ID: </label>
+            <input id="inputID" style="width: 25%;">
+            <button onclick="buildTF()">SUBMIT</button>`;
+        }
+
+        function buildTF() {
+            var id = document.getElementById('inputID').value;
+
+            id = id.toLowerCase(id);
+
+            document.getElementById('view').innerHTML += '<br><div class="toggleFilter" id="' + id + 'tf" onclick="toggleFilter(`' + id + '`)"><span>v</span><p>' + capitalizeFirstLetter(id) + '</p><input class="hide" id="' + id + '" value="0"></div>';
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        function addVar() {
+            var v = document.getElementById('var').value;
+            var varsListInput = document.getElementById('var');
+            var div = document.getElementById('varList');
+            if(varsListInput.value != '') {
+                varsListInput.value += v + ', ';
+            }else {
+                varsListInput.value += v;
+            }
+            
+            div.innerHTML += '<p>' + v + '</p><br>';
+        }
+
+        function buildCheckBadChars() {
+            document.getElementById('view').innerHTML = 
+            '<input placeholder="Set Check" id="setBccInput" type="text"><button href="#" onclick="setCheckBCC();">Submit</button>';
+        }
+
+        function setCheckBCC() {
+            input = document.getElementById('setBccInput').value;
+            document.getElementById('view').innerHTML = '<input placeholder="Add Var" id="bccInput" type="text"><button href="#" onclick="addVarBCC(`' + input + '`);">Submit</button><div id="output">if(</div><div id="output2">if(</div><div id="output3">JS: <br></div><div id="output4">PHP: <br></div>';
+        }
+
+        function addVarBCC(check) {
+            input = document.getElementById('bccInput').value;
+
+            document.getElementById('output').innerHTML += input + ' == "' + check + '"" || ';
+            document.getElementById('output2').innerHTML += input + '.includes(`' + check + '`) || ';
+            document.getElementById('output3').innerHTML += input + ' == ' + check + ' ? ' + input + ' : ' + null + '<br>';
+            document.getElementById('output4').innerHTML += '$' + input + ' = ( $' + input + ' == ' + check + ' ) ? $' + input + ' : ' + null + '<br>';
+
+            document.getElementById('bccInput').value = '';
+        }
+
+        function buildProgressBar() {
+            document.getElementById('view').innerHTML = 
+                `<div class="progressBox">
+                    <h1 class="text-center mt-5 mb-4">Loading<span class="loader__dot">.</span><span class="loader__dot">.</span><span class="loader__dot">.</span></h1>
+                    <div class="progress m-3 mx-auto">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:50%">
+                            50%
+                        </div>
+                    </div>
+                </div>`;
+        }
+
+        function buildDataCodeBuilder() {
+            document.getElementById('view').innerHTML = `
+            <input style="margin-top: 3vh" type="text" autofocus placeholder="Enter Action" id="actionInput">
+            <button href="#" onclick="setAction();">Submit</button>
+            <br>
+            <label>Last Action</label>
+            <input type="text" style="margin-top: 2vh" autofocus placeholder="Last Action" value="` + localStorage.getItem('lastEnteredVarDataAction') + `" id="lastEntryInput">
+            <label>Last Vars</label>
+            <input type="text" autofocus placeholder="Last Vars" value="` + localStorage.getItem('lastEnteredVarData') + `" id="lastEntryInput1">
+            <button href="#" onclick="lastEntry();">Submit</button>
+            `;
+        }
+
+        function setAction(override = false) {
+            if(override) {
+                action = override;
+            }else {
+                action = document.getElementById('actionInput').value;
+            }
+
+            if(action == '') {
+                alert('Enter Valid Action!');
+            }else {
+                document.getElementById('view').innerHTML = `
+                <button href="#" onclick="menu();" style="margin-bottom:2vh">BACK</button><br>
+                <input id="myInput" placeholder="Input" type="text" autofocus>
+                <button id="addVar" onclick="enter();" href="#">Go</button>
+
+                <hr>
+
+                <input type="text" style="margin-top: 2vh" autofocus placeholder="Enter SSV" id="ssvInput">
+                <button href="#" onclick="ssv();">Submit</button>
+
+                <hr>
+
+                <div class="output" id="output">AJAX Call: <br> action=` + action + `</div>
+                <div class="output" id="output2" style="margin-top: 2vh">Javascript: <br></div>
+                <div class="output" id="output3" style="margin-top: 2vh">PHP: <br></div>
+                <div class="output" id="output4" style="margin-top: 2vh">Alert JS: <br></div>
+                <div class="output" id="output5" style="margin-top: 2vh">Echo PHP: <br></div>
+                <div class="output" id="output6" style="margin-top: 2vh;">SSV: <br></div>
+                <div class="output" id="output7" style="margin-top: 2vh;">CSV Cleartext: <br></div>
+                <div class="output" id="output8" style="margin-top: 2vh;">MySQL Statement: <br>INTO {table} (</div>
+                <div class="output" id="output9" style="margin-top: 2vh; margin-bottom: 2vh">MySQL bindVars: <br></div>
+                
+                <input type="text" style="display: none;" id="first" value="0">`;
+                
+
+                localStorage.setItem('lastEnteredVarDataAction', action);
+            }
+
+        }
+
+        function enter(override = false) {
+            if(override) {
+                input = override;
+            }else {
+                input = document.getElementById('myInput').value;
+            }
+            
+
+            if(input == '') {
+                alert('Enter Valid Variable Name');
+            }else {
+                if(document.getElementById('first').value == 0) {
+                    document.getElementById('output').innerHTML += '&' + input + '="' + ' + ' + input;
+                    document.getElementById('first').value = 1;
+
+                    document.getElementById('output4').innerHTML += input;
+                    document.getElementById('output5').innerHTML += '$' + input;
+
+                    document.getElementById('output6').innerHTML += input;
+                    
+                    document.getElementById('output7').innerHTML += input;
+                    document.getElementById('output8').innerHTML += input;
+                    document.getElementById('output9').innerHTML += "$stmt->bindParam(':" + input + "', $" + input + ", PDO::PARAM_STR);<br>";
+                }else {
+                    document.getElementById('output').innerHTML += ' + "&' + input + '="' + ' + ' + input;
+
+                    document.getElementById('output4').innerHTML += " + ', ' + " + input;
+                    document.getElementById('output5').innerHTML += " . ', ' . $" + input;
+
+                    document.getElementById('output6').innerHTML += ' ' + input;
+
+                    document.getElementById('output7').innerHTML += ', ' + input;
+
+                    // document.getElementById('output8').innerHTML += ', ' + input;
+
+                    document.getElementById('output9').innerHTML += "$stmt->bindParam(':" + input + "', $" + input + ", PDO::PARAM_STR);<br>";
+                }
+
+                document.getElementById('output2').innerHTML += input + ' = document.getElementById("' + input + '").value;<br>';
+
+                document.getElementById('output3').innerHTML += '$' + input + ' = filterString($_GET["' + input + '"]);<br>';
+
+                localStorage.setItem('lastEnteredVarData', document.getElementById('output6').innerHTML.substring(9));
+
+            }
+
+            document.getElementById('myInput').value = null;
+            document.getElementById('myInput').autofocus;
+        
+        }
+        
+        </script>
+        
+
+        <style>
+
+            .output  {
+                background-color: whitesmoke;
+                border-radius: 10px;
+                padding: 5;
+            }
+
+            .progressBox {
+                display: block;
+                position: absolute;
+                background-color: #333333;
+                color: white;
+                width: 30%;
+                height: 14vh;
+                border-radius: 10px;
+                top: 35%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .progress {
+                width: 80%;
+            }
+
+            @keyframes blink {50% { color: transparent }}
+            .loader__dot { animation: 1s blink infinite }
+            .loader__dot:nth-child(2) { animation-delay: 250ms }
+            .loader__dot:nth-child(3) { animation-delay: 500ms }
+
+
+            .contain {
+                overflow: hidden;
+            }
+
+            .sliding-background {
+                background: url("/image/dev/76265438a20f36412e5688522097eee6.jpg") repeat-x;
+                background-size: auto 100%;
+                height: 100%;
+                width: 3600px;
+                animation: slide 60s linear infinite;
+                position: fixed;
+                z-index: -1;
+            }
+
+            @keyframes slide {
+                0%{
+                    transform: translate3d(-100px, 0, 0);
+                }
+                100%{
+                    transform: translate3d(-1200px, 0, 0); /* The image width */
+                }
+            }
+
+        </style>
+
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+        <div class="contain container-fluid">
+
+            <!-- <div class="sliding-background"></div> -->
+
+            <h1 style="text-align: center;">This is a Development Menu</h1>
+
+            <button class="btn btn-dark m-2" onclick="openMenu(1)">Data Generation</button>
+            <button class="btn btn-dark m-2" onclick="openMenu(2)">Progress Bar</button>
+            <button class="btn btn-dark m-2" onclick="openMenu(3)">Check for Bad Characters</button>
+            <button class="btn btn-dark m-2" onclick="openMenu(4)">Custom Report Builder</button>
+            <button class="btn btn-dark m-2" onclick="openMenu(5)">Toggle Filter Builder</button>
+            <button class="btn btn-dark m-2" onclick="openMenu(0)">Clear</button>
+
+            <div id="view"></div>
+    
+        </div>
+        
+        <!-- xmlhttp.open("GET", "/inventory/index.php?action=updateItem&itemDetails="+itemCSV); -->
+
+</html>
